@@ -1,0 +1,30 @@
+---
+abstract: 'Asynchronous Gearman client/worker module for AnyEvent applications'
+author:
+  - 'Daisuke Murase <typester@cpan.org>'
+build_requires:
+  ExtUtils::MakeMaker: 6.42
+  Test::More: 0
+  Test::TCP: 0
+configure_requires:
+  ExtUtils::MakeMaker: 6.42
+distribution_type: module
+generated_by: 'Module::Install version 0.91'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: AnyEvent-Gearman
+no_index:
+  directory:
+    - inc
+    - t
+    - xt
+requires:
+  Any::Moose: 0.10
+  AnyEvent: 5.12
+  Data::UUID: 0
+  Object::Container: 0.03002
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.01001
