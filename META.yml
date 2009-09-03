@@ -25,6 +25,7 @@ requires:
   AnyEvent: 5.12
   Data::UUID: 0
   Object::Container: 0.03002
+  Object::Event: 1.0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.01001
+version: 0.01002
