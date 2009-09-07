@@ -28,4 +28,5 @@ requires:
   Object::Event: 1.0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.02
+  repository: git://github.com/typester/anyevent-gearman-perl.git
+version: 0.03001
