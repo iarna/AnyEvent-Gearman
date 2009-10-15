@@ -8,12 +8,6 @@ use AnyEvent::Gearman::Job;
 
 extends 'AnyEvent::Gearman::Connection';
 
-has context => (
-    is       => 'rw',
-    isa      => 'AnyEvent::Gearman::Worker',
-    weak_ref => 1,
-);
-
 has grabbing => (
     is      => 'rw',
     isa     => 'Bool',
@@ -112,6 +106,7 @@ sub process_packet_11 {         # JOB_ASSIGN
                     on_complete => sub {
                         my ($job, $result) = @_;
                         $self->request(WORK_COMPLETE, "$job_handle\0$result");
+                        $self->grab_job();
                     },
                     on_data => sub {
                         my ($job, $data) = @_;
@@ -120,6 +115,7 @@ sub process_packet_11 {         # JOB_ASSIGN
                     on_fail => sub {
                         my ($job) = @_;
                         $self->request(WORK_FAIL, $job_handle);
+                        $self->grab_job();
                     },
                     on_status => sub {
                         my ($job, $numerator, $denominator) = @_;
@@ -175,6 +171,8 @@ AnyEvent::Gearman::Worker::Connection - connection class for worker
 =head1 AUTHOR
 
 Daisuke Murase <typester@cpan.org>
+
+Pedro Melo <melo@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

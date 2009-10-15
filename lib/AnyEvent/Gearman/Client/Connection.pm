@@ -7,12 +7,12 @@ extends 'AnyEvent::Gearman::Connection';
 no Any::Moose;
 
 sub add_task {
-    my ($self, $task, $on_complete, $on_error) = @_;
+    my ($self, $task, $on_complete, $on_error, $type) = @_;
 
     $self->add_on_ready(
         sub {
             push @{ $self->_need_handle }, $task;
-            $self->handler->push_write( $task->pack_req );
+            $self->handler->push_write( $task->pack_req($type) );
         },
         $on_error,
     );
@@ -44,6 +44,7 @@ sub process_packet_8 {          # JOB_CREATED
         my $job_handle = $_[1];
         my $task = shift @{ $self->_need_handle } or return;
 
+        $task->job_handle($job_handle);
         $self->_job_handles->{ $job_handle } = $task;
         $task->event( 'on_created' );
     });
@@ -155,6 +156,8 @@ AnyEvent::Gearman::Client::Connection - connection class for client
 =head1 AUTHOR
 
 Daisuke Murase <typester@cpan.org>
+
+Pedro Melo <melo@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

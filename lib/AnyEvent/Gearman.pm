@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use base 'Exporter';
 
-our $VERSION = '0.03002';
+our $VERSION = '0.04';
 
 our @EXPORT = qw/gearman_client gearman_worker/;
 
@@ -12,13 +12,13 @@ use AnyEvent::Gearman::Worker;
 
 sub gearman_client {
     AnyEvent::Gearman::Client->new(
-        job_servers => \@_,
+        job_servers => [@_],
     );
 }
 
 sub gearman_worker {
     AnyEvent::Gearman::Worker->new(
-        job_servers => \@_,
+        job_servers => [@_],
     );
 }
 
@@ -101,6 +101,8 @@ See L<AnyEvent::Gearman::Worker> for more detail.
 =head1 AUTHOR
 
 Daisuke Murase <typester@cpan.org>
+
+Pedro Melo <melo@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
