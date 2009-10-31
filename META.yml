@@ -26,10 +26,9 @@ no_index:
 requires:
   Any::Moose: 0.10
   AnyEvent: 5.12
-  Data::UUID: 0
   Object::Container: 0.03002
   Object::Event: 1.0
 resources:
   license: http://dev.perl.org/licenses/
   repository: git://github.com/typester/anyevent-gearman-perl.git
-version: 0.04
+version: 0.05

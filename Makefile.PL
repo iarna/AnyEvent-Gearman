@@ -6,7 +6,6 @@ requires 'AnyEvent'          => '5.12';
 requires 'Any::Moose'        => '0.10';
 requires 'Object::Event'     => '1.0';
 requires 'Object::Container' => '0.03002';
-requires 'Data::UUID';
 
 test_requires 'Test::More' => '0.92';
 test_requires 'Test::Exception';
@@ -21,5 +20,19 @@ author_tests('xt');
 
 auto_include;
 auto_set_repository;
+
+if (author_context) {
+    # gfx++
+    # repeat testing
+    # see also ExtUtils::MM_Any::test_via_harness()
+    my $test_moose = q{$(FULLPERLRUN) -MExtUtils::Command::MM -e}
+                    .q{ "do 't/force-moose.pl'; }
+                    .q{test_harness($(TEST_VERBOSE), '$(INST_LIB)', '$(INST_ARCHLIB)')"}
+                    .q{ $(TEST_FILES)} . "\n";
+
+    postamble qq{test_dynamic :: moose\n\n}
+            . qq{moose ::\n}
+            . qq{\t} . $test_moose;
+}
 
 WriteAll;
