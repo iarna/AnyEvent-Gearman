@@ -31,4 +31,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: git://github.com/typester/anyevent-gearman-perl.git
-version: 0.05
+version: 0.06
